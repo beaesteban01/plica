@@ -72,11 +72,14 @@ bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic IDSPRUEB
 cd /home/vagrant/elasticsearch
 bin/elasticsearch
 ```
+   - Para comprobar que está levantado modifica en `elasticsearch.yml` y descomenta `network.host:0.0.0.0`
+   - Accede desde **http://localhost:9200/**
 10. Lanza Kibana
 ```
 cd /home/vagrant/kibana-7.9.1-linux-x86_64/
 bin/kibana
 ```
+   - Accede desde **http://localhost:5601/**
 11. Ejecuta el .py con Spark
 ```
 spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.0.1 StructuredStreamingAndElasticPrueba.py
