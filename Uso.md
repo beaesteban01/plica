@@ -81,3 +81,20 @@ bin/kibana
 ```
 spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.0.1 StructuredStreamingAndElasticPrueba.py
 ```
+# Problemas con Elasticsearch
+1. Error *ElasticsearchIllegalStateException[Failed to obtain node lock, is the following location writable?: [/home/vagrant/elasticsearchdata/]*
+```
+ps aux | grep 'java'
+kill -9 <PID>
+```
+2. Error *the default discovery settings are unsuitable for production use; at least one of [discovery.seed_hosts, discovery.seed_providers, cluster.initial_master_nodes] must be configured*</br>
+Modificar en `elasticsearch.yml`
+```
+# at least 
+discovery.seed_hosts : []
+cluster.initial_master_nodes : []
+```
+3. Error *max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]*
+```
+sysctl -w vm.max_map_count=262144
+```
