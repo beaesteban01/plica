@@ -52,6 +52,7 @@ cd /home/vagrant/kafka
 
 # Servidor zookeeper
 bin/zookeeper-server-start.sh config/zookeeper.properties
+# Comprobar si zookeeper esta corriendo con sudo lsof -i :2181 y matar el proceso con kill -9 <PID> si es necesario
 
 # Servidor kafka
 bin/kafka-server-start.sh config/server.properties
