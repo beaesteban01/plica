@@ -6,4 +6,8 @@ Cambio el jar a version 3.1.0 y sigue dando error (unas veces si otras no)
 Error 2
 java.lang.ClassNotFoundException: Failed to find data source: org.elasticsearch.spark.sql. Please find packages at http://spark.apache.org/third-party-projects.html
 
-Añado el jar en el comando de spark --> me sale el error 1 
+Añado el jar en el comando de spark
+
+spark-submit --jars /home/vagrant/PLICA/lib/elasticsearch-spark-20_2.11-7.9.1.jar --packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.7 RecepciondatosRM.py
+
+--> me sale el error 1 
