@@ -88,12 +88,12 @@ curl -Lko /home/vagrant/PLICA/lib/commons-httpclient-4.5.12.jar https://repo1.ma
 #curl -Lko /home/vagrant/PLICA/lib/commons-httpclient-3.1.0.jar https://maven.repository.redhat.com/ga/commons-httpclient/commons-httpclient/3.1.0.redhat-8/commons-httpclient-3.1.0.redhat-8.jar
 
 #
-# Install Hadoop 3.0.1 --> 3.1.4 (spark para hadoop 2.7, pruebo con esta)
-# 3.1.4 aug 2020 release
-curl -Lko /tmp/hadoop-3.1.4.tar.gz https://apache.brunneis.com/hadoop/common/hadoop-3.1.4/hadoop-3.1.4-src.tar.gz
+# Install Hadoop 3.0.1 
+#
+curl -Lko /tmp/hadoop-3.0.1.tar.gz https://archive.apache.org/dist/hadoop/common/hadoop-3.0.1/hadoop-3.0.1.tar.gz
 mkdir -p /home/vagrant/hadoop
 cd /home/vagrant/
-tar -xvf /tmp/hadoop-3.1.4.tar.gz -C hadoop --strip-components=1
+tar -xvf /tmp/hadoop-3.0.1.tar.gz -C hadoop --strip-components=1
 
 echo "" >> /home/vagrant/.bash_profile
 export HADOOP_HOME=/home/vagrant/hadoop
