@@ -245,6 +245,7 @@ cd /home/vagrant
 
 # Set the spark.jars path
 echo "spark.jars /home/vagrant/PLICA/lib/mongo-hadoop-spark-2.0.2.jar,/home/vagrant/PLICA/lib/mongo-java-driver-3.6.1.jar,/home/vagrant/PLICA/lib/mongo-hadoop-2.0.2.jar,/home/vagrant/PLICA/lib/elasticsearch-spark-20_2.11-6.1.2.jar,/home/vagrant/PLICA/lib/snappy-java-1.1.7.7.jar,/home/vagrant/PLICA/lib/lzo-hadoop-1.0.6.jar,/home/vagrant/PLICA/lib/commons-httpclient-4.5.12.jar" | sudo tee -a /home/vagrant/spark/conf/spark-defaults.conf
+#echo "spark.jars /home/vagrant/PLICA/lib/elasticsearch-spark-20_2.11-6.1.2.jar" | sudo tee -a /home/vagrant/spark/conf/spark-defaults.conf
 
 #
 # 2.1.1
@@ -370,16 +371,16 @@ rm /tmp/janusgraph-0.2.0-hadoop2.zip
 # /home/vagrant/PLICA/install/phantomjs.sh
 
 #
-# # Install KIBANA
+# # Install KIBANA 5.6.0
 #
 
 
 cd /home/vagrant
-curl -O https://artifacts.elastic.co/downloads/kibana/kibana-7.9.1-linux-x86_64.tar.gz
-curl https://artifacts.elastic.co/downloads/kibana/kibana-7.9.1-linux-x86_64.tar.gz.sha512 | shasum -a 512 -c - 
-tar -xzf kibana-7.9.1-linux-x86_64.tar.gz
-cd kibana-7.9.1-linux-x86_64/
-rm /home/vagrant/kibana-7.9.1-linux-x86_64.tar.gz
+curl -O https://artifacts.elastic.co/downloads/kibana/kibana-5.6.0-linux-x86_64.tar.gz
+#curl https://artifacts.elastic.co/downloads/kibana/kibana-7.9.1-linux-x86_64.tar.gz.sha512 | shasum -a 512 -c - 
+tar -xzf kibana-5.6.0-linux-x86_64.tar.gz
+cd kibana-5.6.0-linux-x86_64/
+rm /home/vagrant/kibana-5.6.0-linux-x86_64.tar.gz
 
 # make sure we own /home/vagrant/.bash_profile after all the 'sudo tee'
 sudo chgrp vagrant /home/vagrant/.bash_profile
