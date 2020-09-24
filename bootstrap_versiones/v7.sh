@@ -214,12 +214,12 @@ sudo -u vagrant /home/vagrant/elasticsearch/bin/elasticsearch -d # re-run if you
 # echo "Testing Elasticsearch with a query ..." | tee -a $LOG_FILE
 # curl 'localhost:9200/agile_data_science/on_time_performance/_search?q=Origin:ATL&pretty'
 
-# Install Elasticsearch for Hadoop 6.1.2 --> 7.9.1 (solo soporta scala 2.11)
+# Install Elasticsearch for Hadoop 6.1.2 
 echo "curl -sLko /tmp/elasticsearch-hadoop-6.1.2.zip http://download.elastic.co/hadoop/elasticsearch-hadoop-6.1.2.zip"
 curl -sLko /tmp/elasticsearch-hadoop-6.1.2.zip http://download.elastic.co/hadoop/elasticsearch-hadoop-6.1.2.zip
 
 unzip /tmp/elasticsearch-hadoop-6.1.2.zip
-mv /home/vagrant/elasticsearch-hadoop-7.9.1 /home/vagrant/elasticsearch-hadoop
+mv /home/vagrant/elasticsearch-hadoop-6.1.2 /home/vagrant/elasticsearch-hadoop
 cp /home/vagrant/elasticsearch-hadoop/dist/elasticsearch-hadoop-6.1.2.jar /home/vagrant/PLICA/lib/
 cp /home/vagrant/elasticsearch-hadoop/dist/elasticsearch-spark-20_2.11-6.1.2.jar /home/vagrant/PLICA/lib/
 echo "spark.speculation false" | sudo tee -a /home/vagrant/spark/conf/spark-defaults.conf
