@@ -138,8 +138,8 @@ echo 'export PATH=$PATH:$SPARK_HOME/bin' | sudo tee -a /home/vagrant/.bash_profi
 cp /home/vagrant/spark/conf/spark-defaults.conf.template /home/vagrant/spark/conf/spark-defaults.conf
 echo 'spark.io.compression.codec org.apache.spark.io.SnappyCompressionCodec' | sudo tee -a /home/vagrant/spark/conf/spark-defaults.conf
 
-# Give Spark 8GB of RAM, use Python3
-echo "spark.driver.memory 8g" | sudo tee -a $SPARK_HOME/conf/spark-defaults.conf
+# Give Spark 8GB of RAM, use Python3 --> pruebo con 6
+echo "spark.driver.memory 6g" | sudo tee -a $SPARK_HOME/conf/spark-defaults.conf
 echo "spark.executor.cores 2" | sudo tee -a $SPARK_HOME/conf/spark-defaults.conf
 echo "PYSPARK_PYTHON=python3" | sudo tee -a $SPARK_HOME/conf/spark-env.sh
 echo "PYSPARK_DRIVER_PYTHON=python3" | sudo tee -a $SPARK_HOME/conf/spark-env.sh
@@ -244,7 +244,7 @@ curl -sLko lib/lzo-hadoop-1.0.6.jar https://repo1.maven.org/maven2/org/anarres/l
 cd /home/vagrant
 
 # Set the spark.jars path
-echo "spark.jars /home/vagrant/PLICA/lib/mongo-hadoop-spark-2.0.2.jar,/home/vagrant/PLICA/lib/mongo-java-driver-3.6.1.jar,/home/vagrant/PLICA/lib/mongo-hadoop-2.0.2.jar,/home/vagrant/PLICA/lib/elasticsearch-spark-20_2.11-6.1.2.jar,/home/vagrant/PLICA/lib/snappy-java-1.1.7.7.jar,/home/vagrant/PLICA/lib/lzo-hadoop-1.0.6.jar,/home/vagrant/PLICA/lib/commons-httpclient-4.5.12.jar" | sudo tee -a /home/vagrant/spark/conf/spark-defaults.conf
+echo "spark.jars /home/vagrant/PLICA/lib/elasticsearch-spark-20_2.11-6.1.2.jar,/home/vagrant/PLICA/lib/snappy-java-1.1.7.7.jar,/home/vagrant/PLICA/lib/lzo-hadoop-1.0.6.jar,/home/vagrant/PLICA/lib/commons-httpclient-4.5.12.jar" | sudo tee -a /home/vagrant/spark/conf/spark-defaults.conf
 #echo "spark.jars /home/vagrant/PLICA/lib/elasticsearch-spark-20_2.11-6.1.2.jar" | sudo tee -a /home/vagrant/spark/conf/spark-defaults.conf
 
 #
