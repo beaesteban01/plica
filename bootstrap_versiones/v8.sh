@@ -215,7 +215,7 @@ sudo -u vagrant /home/vagrant/elasticsearch/bin/elasticsearch -d # re-run if you
 # echo "Testing Elasticsearch with a query ..." | tee -a $LOG_FILE
 # curl 'localhost:9200/agile_data_science/on_time_performance/_search?q=Origin:ATL&pretty'
 
-# Install Elasticsearch for Hadoop 6.1.2 
+# Install Elasticsearch for Hadoop 7.9.2 
 echo "curl -sLko /tmp/elasticsearch-hadoop-7.9.2.zip https://artifacts.elastic.co/downloads/elasticsearch-hadoop/elasticsearch-hadoop-7.9.2.zip"
 curl -sLko /tmp/elasticsearch-hadoop-7.9.2.zip https://artifacts.elastic.co/downloads/elasticsearch-hadoop/elasticsearch-hadoop-7.9.2.zip
 unzip /tmp/elasticsearch-hadoop-7.9.2.zip
@@ -379,7 +379,8 @@ cd /home/vagrant
 curl -O https://artifacts.elastic.co/downloads/kibana/kibana-7.9.2-linux-x86_64.tar.gz
 #curl https://artifacts.elastic.co/downloads/kibana/kibana-7.9.1-linux-x86_64.tar.gz.sha512 | shasum -a 512 -c - 
 tar -xzf kibana-7.9.2-linux-x86_64.tar.gz
-cd kibana-7.9.2-linux-x86_64/
+mv /home/vagrant/kibana-7.9.2-linux-x86_64/ /home/vagrant/kibana
+cd kibana
 rm /home/vagrant/kibana-7.9.2-linux-x86_64.tar.gz
 
 # make sure we own /home/vagrant/.bash_profile after all the 'sudo tee'
