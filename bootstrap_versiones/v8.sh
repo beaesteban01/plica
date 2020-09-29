@@ -80,12 +80,11 @@ sudo chown -R vagrant /home/vagrant/PLICA
 sudo chgrp -R vagrant /home/vagrant/PLICA
 cd /home/vagrant
 
-# Install commons-httpclient 
-## ACTUALIZADO 3.1 --> 4.5.12 https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient/4.5.12
+#
+# Install commons-httpclient  4.5.12
+#
 curl -Lko /home/vagrant/PLICA/lib/commons-httpclient-4.5.12.jar https://repo1.maven.org/maven2/org/apache/httpcomponents/httpclient/4.5.12/httpclient-4.5.12.jar
 
-# 3.1.0
-#curl -Lko /home/vagrant/PLICA/lib/commons-httpclient-3.1.0.jar https://maven.repository.redhat.com/ga/commons-httpclient/commons-httpclient/3.1.0.redhat-8/commons-httpclient-3.1.0.redhat-8.jar
 
 #
 # Install Hadoop 3.1.4
@@ -154,7 +153,7 @@ sudo chown -R vagrant /home/vagrant/spark
 sudo chgrp -R vagrant /home/vagrant/spark
 
 # #
-# # Install MongoDB and dependencies (NOT WORKING)
+# # Install MongoDB and dependencies 
 # #
 # sudo apt-get install -y mongodb
 # sudo mkdir -p /data/db
@@ -194,9 +193,9 @@ sudo chgrp -R vagrant /home/vagrant/spark
 # rm -rf /home/vagrant/mongo-hadoop
 
 #
-# # 7.9.2
 # Install ElasticSearch in the elasticsearch directory in the root of our project, and the Elasticsearch for Hadoop package
-#
+# 7.9.2
+
 echo "curl -sLko /tmp/elasticsearch-7.9.2.tar.gz https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.9.2-linux-x86_64.tar.gz"
 curl -sLko /tmp/elasticsearch-7.9.2.tar.gz https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.9.2-linux-x86_64.tar.gz
 mkdir /home/vagrant/elasticsearch
@@ -215,7 +214,10 @@ sudo -u vagrant /home/vagrant/elasticsearch/bin/elasticsearch -d # re-run if you
 # echo "Testing Elasticsearch with a query ..." | tee -a $LOG_FILE
 # curl 'localhost:9200/agile_data_science/on_time_performance/_search?q=Origin:ATL&pretty'
 
+#
 # Install Elasticsearch for Hadoop 7.9.2 
+#
+
 echo "curl -sLko /tmp/elasticsearch-hadoop-7.9.2.zip https://artifacts.elastic.co/downloads/elasticsearch-hadoop/elasticsearch-hadoop-7.9.2.zip"
 curl -sLko /tmp/elasticsearch-hadoop-7.9.2.zip https://artifacts.elastic.co/downloads/elasticsearch-hadoop/elasticsearch-hadoop-7.9.2.zip
 unzip /tmp/elasticsearch-hadoop-7.9.2.zip
@@ -235,10 +237,14 @@ echo "" | tee -a $LOG_FILE
 echo "Installing snappy-java and lzo-java and adding them to our classpath ..." | tee -a $LOG_FILE
 cd /home/vagrant/PLICA
 
-## ACTUALIZADO 1.1.7.1 --> 1.1.7.7  https://mvnrepository.com/artifact/org.xerial.snappy/snappy-java/1.1.7.7
+#
+# Snappy-java 1.1.7.7
+# 
 curl -sLko lib/snappy-java-1.1.7.7.jar https://repo1.maven.org/maven2/org/xerial/snappy/snappy-java/1.1.7.7/snappy-java-1.1.7.7.jar
 
-## ACTUALIZADO 1.0.5 --> 1.0.6  https://mvnrepository.com/artifact/org.anarres.lzo/lzo-hadoop/1.0.6
+#
+# lzo-hadoop 1.0.6 
+# 
 curl -sLko lib/lzo-hadoop-1.0.6.jar https://repo1.maven.org/maven2/org/anarres/lzo/lzo-hadoop/1.0.6/lzo-hadoop-1.0.6.jar
 
 cd /home/vagrant
@@ -248,14 +254,12 @@ echo "spark.jars /home/vagrant/PLICA/lib/elasticsearch-spark-20_2.11-7.9.2.jar,/
 #echo "spark.jars /home/vagrant/PLICA/lib/elasticsearch-spark-20_2.11-6.1.2.jar" | sudo tee -a /home/vagrant/spark/conf/spark-defaults.conf
 
 #
-# 2.1.1
-
-# Kafka install and setup
+# Kafka install and setup 2.4.1
 #
+
 echo "" | tee -a $LOG_FILE
 echo "" | tee -a $LOG_FILE
 echo "Downloading and installing Kafka version 2.4.1 for Scala 2.11 ..." | tee -a $LOG_FILE
-#curl -Lko /tmp/kafka_2.11-2.1.1.tgz https://www-us.apache.org/dist/kafka/2.1.1/kafka_2.11-2.1.1.tgz
 curl -Lko /tmp/kafka_2.11-2.4.1.tgz https://apache.brunneis.com/kafka/2.4.1/kafka_2.11-2.4.1.tgz
 
 mkdir -p /home/vagrant/kafka
@@ -263,7 +267,7 @@ cd /home/vagrant/
 tar -xvzf /tmp/kafka_2.11-2.4.1.tgz -C kafka --strip-components=1 && rm -f /tmp/kafka_2.11-2.4.1.tgz
 
 # Set the log dir to kafka/logs
-# Creo que no hace nada --> si al levantar servidores no funciona --> borrar /kafka/logs
+# si al levantar servidores no funciona --> borrar /kafka/logs
 sed -i '/log.dirs=\/tmp\/kafka-logs/c\log.dirs=logs' /home/vagrant/kafka/config/server.properties
 
 # Give to vagrant
@@ -279,30 +283,31 @@ sed -i '/log.dirs=\/tmp\/kafka-logs/c\log.dirs=logs' /home/vagrant/kafka/config/
 #el sed -i pone tmp/kafka-logs como log.dir y borra log.dirs=logs en el fichero server.properties
  
 
-####LEVANTARLOS MANUALMENTE
+#### LEVANTAR SERVIDORES MANUALMENTE
 
 # # Run zookeeper (which kafka depends on), then Kafka
 # echo "Running Zookeeper as a daemon ..." | tee -a $LOG_FILE
 # sudo -H -u vagrant /home/vagrant/kafka/bin/zookeeper-server-start.sh -daemon /home/vagrant/kafka/config/zookeeper.properties
 # echo "Running Kafka Server as a daemon ..." | tee -a $LOG_FILE
 # sudo -H -u vagrant /home/vagrant/kafka/bin/kafka-server-start.sh -daemon /home/vagrant/kafka/config/server.properties
-#
-# Install and setup Airflow
-#
-echo "export SLUGIFY_USES_TEXT_UNIDECODE=yes"
-export SLUGIFY_USES_TEXT_UNIDECODE=yes
-pip install apache-airflow[hive]
-mkdir /home/vagrant/airflow
-mkdir /home/vagrant/airflow/dags
-mkdir /home/vagrant/airflow/logs
-mkdir /home/vagrant/airflow/plugins
 
-sudo chown -R vagrant /home/vagrant/airflow
-sudo chgrp -R vagrant /home/vagrant/airflow
+# #
+# # Install and setup Airflow
+# #
+# echo "export SLUGIFY_USES_TEXT_UNIDECODE=yes"
+# export SLUGIFY_USES_TEXT_UNIDECODE=yes
+# pip install apache-airflow[hive]
+# mkdir /home/vagrant/airflow
+# mkdir /home/vagrant/airflow/dags
+# mkdir /home/vagrant/airflow/logs
+# mkdir /home/vagrant/airflow/plugins
 
-airflow initdb
-airflow webserver -D &
-airflow scheduler -D &
+# sudo chown -R vagrant /home/vagrant/airflow
+# sudo chgrp -R vagrant /home/vagrant/airflow
+
+# airflow initdb
+# airflow webserver -D &
+# airflow scheduler -D &
 
 # Jupyter server setup
 jupyter notebook --generate-config
@@ -323,7 +328,6 @@ echo "# Disable token authentication" >> jupyter_notebook_config.py
 echo "c.NotebookApp.token = '' " >> jupyter_notebook_config.py
 
 
-
 cp /home/vagrant/PLICA/jupyter_notebook_config.py /root/.jupyter/
 mkdir /root/certs
 sudo openssl req -x509 -nodes -days 365 -newkey rsa:1024 -subj "/C=US" -keyout /root/certs/mycert.pem -out /root/certs/mycert.pem
@@ -332,33 +336,32 @@ cd /home/vagrant/PLICA
 sudo -u vagrant /home/vagrant/anaconda/bin/jupyter notebook --ip=0.0.0.0 --NotebookApp.token= --allow-root --no-browser &
 cd
 
-#
 sudo chown -R vagrant /home/vagrant/airflow
 sudo chgrp -R vagrant /home/vagrant/airflow
 
 echo "sudo chown -R vagrant /home/vagrant/airflow" | sudo tee -a /home/vagrant/.bash_profile
 echo "sudo chgrp -R vagrant /home/vagrant/airflow" | sudo tee -a /home/vagrant/.bash_profile
 
-# Install Ant to build Cassandra
-sudo apt-get install -y ant
+# # Install Ant to build Cassandra
+# sudo apt-get install -y ant
 
-# Install Cassandra - must build from source as the latest 3.11.1 build is broken...
-git clone https://github.com/apache/cassandra
-cd cassandra
-git checkout cassandra-3.11
-ant
-bin/cassandra
-export PATH=$PATH:/home/vagrant/cassandra/bin
-echo 'export PATH=$PATH:/home/vagrant/cassandra/bin' | sudo tee -a /home/vagrant/.bash_profile
-cd ..
+# # Install Cassandra - must build from source as the latest 3.11.1 build is broken...
+# git clone https://github.com/apache/cassandra
+# cd cassandra
+# git checkout cassandra-3.11
+# ant
+# bin/cassandra
+# export PATH=$PATH:/home/vagrant/cassandra/bin
+# echo 'export PATH=$PATH:/home/vagrant/cassandra/bin' | sudo tee -a /home/vagrant/.bash_profile
+# cd ..
 
-# Install and setup JanusGraph
-cd /home/vagrant
-curl -Lko /tmp/janusgraph-0.2.0-hadoop2.zip \
-  https://github.com/JanusGraph/janusgraph/releases/download/v0.2.0/janusgraph-0.2.0-hadoop2.zip
-unzip -d . /tmp/janusgraph-0.2.0-hadoop2.zip
-mv janusgraph-0.2.0-hadoop2 janusgraph
-rm /tmp/janusgraph-0.2.0-hadoop2.zip
+# # Install and setup JanusGraph
+# cd /home/vagrant
+# curl -Lko /tmp/janusgraph-0.2.0-hadoop2.zip \
+#   https://github.com/JanusGraph/janusgraph/releases/download/v0.2.0/janusgraph-0.2.0-hadoop2.zip
+# unzip -d . /tmp/janusgraph-0.2.0-hadoop2.zip
+# mv janusgraph-0.2.0-hadoop2 janusgraph
+# rm /tmp/janusgraph-0.2.0-hadoop2.zip
 
 # DE MOMENTO NADA. download.sh es FICHERO DE AGILE 
 # # Download data
@@ -370,10 +373,10 @@ rm /tmp/janusgraph-0.2.0-hadoop2.zip
 # # Install phantomjs
 # /home/vagrant/PLICA/install/phantomjs.sh
 
-#
-# # Install KIBANA 7.9.2
-#
 
+#
+# Install KIBANA 7.9.2
+#
 
 cd /home/vagrant
 curl -O https://artifacts.elastic.co/downloads/kibana/kibana-7.9.2-linux-x86_64.tar.gz
