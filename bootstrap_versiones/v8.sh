@@ -74,7 +74,7 @@ echo "export PROJECT_HOME=/home/vagrant/PLICA" | sudo tee -a /home/vagrant/.bash
 
 conda install -y python=3.6.8
 conda install -y iso8601 numpy scipy scikit-learn matplotlib ipython jupyter
-pip install bs4 Flask beautifulsoup4 frozendict geopy kafka-python py4j pymongo pyelasticsearch requests selenium tabulate tldextract wikipedia findspark imongo-kernel
+pip install pandas bs4 Flask beautifulsoup4 frozendict geopy kafka-python py4j pymongo pyelasticsearch requests selenium tabulate tldextract wikipedia findspark imongo-kernel
 
 sudo chown -R vagrant /home/vagrant/PLICA
 sudo chgrp -R vagrant /home/vagrant/PLICA
@@ -138,7 +138,7 @@ echo 'export PATH=$PATH:$SPARK_HOME/bin' | sudo tee -a /home/vagrant/.bash_profi
 cp /home/vagrant/spark/conf/spark-defaults.conf.template /home/vagrant/spark/conf/spark-defaults.conf
 echo 'spark.io.compression.codec org.apache.spark.io.SnappyCompressionCodec' | sudo tee -a /home/vagrant/spark/conf/spark-defaults.conf
 
-# Give Spark 8GB of RAM, use Python3 --> pruebo con 6
+# Give Spark 8GB of RAM, use Python3 --> 6gb en mi caso
 echo "spark.driver.memory 6g" | sudo tee -a $SPARK_HOME/conf/spark-defaults.conf
 echo "spark.executor.cores 2" | sudo tee -a $SPARK_HOME/conf/spark-defaults.conf
 echo "PYSPARK_PYTHON=python3" | sudo tee -a $SPARK_HOME/conf/spark-env.sh
@@ -336,11 +336,12 @@ cd /home/vagrant/PLICA
 sudo -u vagrant /home/vagrant/anaconda/bin/jupyter notebook --ip=0.0.0.0 --NotebookApp.token= --allow-root --no-browser &
 cd
 
-sudo chown -R vagrant /home/vagrant/airflow
-sudo chgrp -R vagrant /home/vagrant/airflow
 
-echo "sudo chown -R vagrant /home/vagrant/airflow" | sudo tee -a /home/vagrant/.bash_profile
-echo "sudo chgrp -R vagrant /home/vagrant/airflow" | sudo tee -a /home/vagrant/.bash_profile
+# sudo chown -R vagrant /home/vagrant/airflow
+# sudo chgrp -R vagrant /home/vagrant/airflow
+
+# echo "sudo chown -R vagrant /home/vagrant/airflow" | sudo tee -a /home/vagrant/.bash_profile
+# echo "sudo chgrp -R vagrant /home/vagrant/airflow" | sudo tee -a /home/vagrant/.bash_profile
 
 # # Install Ant to build Cassandra
 # sudo apt-get install -y ant
