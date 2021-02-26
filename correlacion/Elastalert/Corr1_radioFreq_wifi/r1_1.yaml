@@ -1,0 +1,51 @@
+# (Required)
+# Rule name, must be unique
+name: r1_1_rf
+
+# (Required)
+# Type of alert.
+# the frequency rule type alerts when num_events events occur with timeframe time
+type: frequency
+
+# (Required)
+# Index to search, wildcard supported
+index: prueba_rf_10
+
+# If different than default
+timestamp_field: time_stamp
+# (Required, frequency specific)
+# Alert when this many documents matching the query occur within a timeframe
+num_events: 3
+
+# (Required, frequency specific)
+# num_events must occur within this amount of time to trigger an alert
+timeframe:
+ # hours: 1
+  minutes: 1
+
+# only the first alert will be sent by default. 
+# If you want every alert, set realert to 0 minutes
+realert:
+  minutes: 0
+
+# to see all the hits related to the match
+attach_related: true  
+
+# (Required)
+filter:
+- query:
+    query_string:
+      query: "freq: 433.78 AND signal: -63" #OK!
+     query_string: 
+      query: "mod: OOK"
+
+
+
+# filter:
+#  - terms:
+#      freq: "443.78"
+#      signal: "87368712638217"
+
+alert:
+- "debug"
+#include: ["mod", "payload", "@timestamp"]

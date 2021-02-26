@@ -1,0 +1,34 @@
+
+# (Required)
+# Rule name, must be unique
+name: r_correlacion
+
+# (Required)
+# Type of alert.
+#
+type: cardinality
+cardinality_field: rule_name
+max_cardinality: 2
+
+# (Required)
+index: elastalert_status
+#
+# num_events must occur within this amount of time to trigger an alert
+timeframe:
+ # hours: 1
+  minutes: 3
+
+
+aggregation:
+  minutes: 2
+
+filter:
+ - terms:
+     rule_name: [r1_redmov, r2_wifi, r3_radiofreq]
+ # - term:
+ #      alert_sent: true
+
+# (Required)
+# The alert is use when a match is found
+alert:
+- "debug"

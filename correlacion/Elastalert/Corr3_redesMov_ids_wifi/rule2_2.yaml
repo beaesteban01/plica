@@ -1,0 +1,44 @@
+# (Required)  
+# Rule name, must be unique
+name: r2_2_wifi
+description: "tx_packets/rx_packets higher than x in 2 min"
+
+# (Required)
+# Type of alert.
+# the frequency rule type alerts when num_events events occur with timeframe time
+type: frequency
+
+# (Required)
+# Index to search, wildcard supported
+index: prueba_wifi_11
+
+timestamp_field: time_stamp
+# (Required, frequency specific)
+# Alert when this many documents matching the query occur within a timeframe
+num_events: 1
+
+# (Required, frequency specific)
+# num_events must occur within this amount of time to trigger an alert
+timeframe:
+ # hours: 1
+  minutes: 2
+
+realert:
+  minutes: 0
+
+attach_related: true
+
+#funciona como AND
+filter:
+- range:
+    tx_packets:
+      from: 1000
+      to: 1000000000000000
+- range:
+    rx_packets:
+      from : 100
+      to: 20000000000000
+
+
+alert:
+- "debug"

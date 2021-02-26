@@ -1,0 +1,32 @@
+# (Required)
+# Rule name, must be unique
+name: r1_2_wifi
+
+# (Required)
+# Type of alert.
+# the frequency rule type alerts when num_events events occur with timeframe time
+type: frequency
+
+# (Required)
+# Index to search, wildcard supported
+index: prueba_wifi_8
+timestamp_field: time_stamp
+# (Required, frequency specific)
+# Alert when this many documents matching the query occur within a timeframe
+num_events: 1
+
+# (Required, frequency specific)
+# num_events must occur within this amount of time to trigger an alert
+timeframe:
+ # hours: 1
+  minutes: 1
+
+# (Required)
+filter:
+- query:
+    query_string:
+      query: "auth: PSK"
+
+alert:
+- "debug"
+#include: ["mod", "payload", "@timestamp"]

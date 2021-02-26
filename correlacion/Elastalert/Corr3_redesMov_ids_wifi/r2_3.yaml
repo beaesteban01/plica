@@ -1,0 +1,38 @@
+ (Required)
+# Rule name, must be unique
+name: r2_3_ids
+description: "memuse higher than x and prediction=1"
+
+# (Required)
+# Type of alert.
+# the frequency rule type alerts when num_events events occur with timeframe time
+type: any
+
+# (Required)
+# Index to search, wildcard supported
+index: prueba_ids_1
+
+# If different than default
+timestamp_field: time_stamp
+# (Required, frequency specific)
+# Alert when this many documents matching the query occur within a timeframe
+
+# only the first alert will be sent by default. 
+# If you want every alert, set realert to 0 minutes
+realert:
+  minutes: 0
+
+# to see all the hits related to the match
+attach_related: true  
+
+filter:
+- range: 
+	memuse: 
+		from: 7474304
+		to : 7474304000000000000
+- query:
+    query_string:
+      query: "prediction: 1"
+
+alert:
+- "debug"

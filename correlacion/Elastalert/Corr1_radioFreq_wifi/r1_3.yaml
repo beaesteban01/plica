@@ -1,0 +1,52 @@
+
+# (Required)
+# Rule name, must be unique
+name: r1_3_corr
+
+# (Required)
+# Type of alert.
+#
+type: cardinality
+cardinality_field: rule_name
+max_cardinality: 1
+
+# (Required)
+# Index to search, wildcard supported
+#index: "rf_7_correlacion, wifi_1_correlacion"
+#index: rf_8_correlacion
+index: elastalert_status
+#
+# num_events must occur within this amount of time to trigger an alert
+timeframe:
+ # hours: 1
+  minutes: 3
+
+#PRUEBA AGGREGATION
+aggregation:
+  minutes: 2
+# (Required)
+# A list of Elasticsearch filters used for find events
+# These filters are joined with AND and nested in a filtered query
+# For more info: http://www.elasticsearch.org/guide/en/elasticsearch/reference/cu$
+
+filter:
+ - terms:
+     rule_name: [rule1_rf, rule2_wifi]
+      # - rule1_rf
+      # - rule2_wifi
+ # - term:
+ #      alert_sent: true
+
+
+
+
+# (Required)
+# The alert is use when a match is found
+alert:
+- "debug"
+# - command:
+#     command: ["python", "/home/vagrant/helloworld.py"]
+# (required, email specific)
+# a list of email addresses to send alerts to
+#email:
+#- "elastic@gmail.com"
