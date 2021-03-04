@@ -2,7 +2,7 @@
 # Rule name, must be unique
 name: detect_rf
 
-description: "2 events (con anomalia: true) radio_frecuencia in 5 minutes"
+description: "1 events (con anomalia: true) radio_frecuencia in 5 minutes"
 
 # (Required) Type of alert. the frequency rule type alerts when 
 # num_events events occur with timeframe time
@@ -17,7 +17,7 @@ timestamp_field: timestamp
 # (Required, frequency specific) Alert when this many documents matching 
 # the query occur within a timeframe only the first alert will be sent 
 # by default. If you want every alert, set realert to 0 minutes
-num_events: 2
+num_events: 1
 
 # (Required, frequency specific) num_events must occur within this 
 # amount of time to trigger an alert

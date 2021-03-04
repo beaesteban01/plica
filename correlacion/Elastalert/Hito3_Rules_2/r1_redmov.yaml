@@ -1,7 +1,7 @@
 # (Required) Rule name, must be unique
 name: detect_rm
 
-description: "2 events (con anomalia: true) redes moviles in 5 minutes"
+description: "1 events (con anomalia: true) redes moviles in 5 minutes"
 # (Required) 
 #Type of alert. 
 #the frequency rule type alerts when num_events events occur with timeframe time
@@ -16,7 +16,7 @@ timestamp_field: timestamp
 
 # (Required, frequency specific) 
 #Alert when this many documents matching the query occur within a timeframe
-num_events: 2
+num_events: 1
 
 # (Required, frequency specific) 
 #num_events must occur within this amount of time to trigger an alert
