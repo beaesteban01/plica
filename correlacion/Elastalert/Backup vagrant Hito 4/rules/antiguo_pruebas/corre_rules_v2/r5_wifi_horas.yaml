@@ -1,0 +1,28 @@
+#Rule name
+name: detect_rango_horario 
+description: "any events en rango horario (raro)"
+
+# (Required) Type of alert. 
+type: any
+
+# (Required) Index to search, wildcard supported
+index: wifi_bea
+
+timestamp_field: timestamp
+#Madrid UTC+1: start/end time es 1h mas
+start_time: "15:00"
+end_time: "17:00"
+
+drop_if: "inside"
+
+realert:
+  minutes: 0
+
+# filter:
+# - query: 
+#     query_string:
+#       query: "anomalia: true"
+match_enhancements:
+- "elastalert_modules.hour_enhancement.HourRangeChoose"
+alert:
+- "debug"

@@ -1,0 +1,6 @@
+filter:
+#- query:
+#    query_string:
+#      query: "r1_redmov_pru AND r2_wifi_pru" default_field: rule_name
+- term:
+    rule_name: "r2_wifi_pru"

@@ -5,7 +5,7 @@ type: blacklist
 
 timestamp_field: timestamp
 
-index: wifi_bea
+index: wifi
 
 realert:
   minutes: 0

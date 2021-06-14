@@ -1,0 +1,21 @@
+name: mantenimiento_wifi
+description: "alerta si menos de x eventos en x tiempo"
+
+type: flatline
+
+index: wifi
+
+timestamp_field: timestamp
+#The minimum number of events for an alert not to be triggered.
+threshold: 1
+
+#idea de la regla: 24h
+timeframe: 
+  minutes: 3
+#no lo saca :(
+#include:
+#  - _index
+ 
+
+alert:
+- "debug"

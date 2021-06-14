@@ -1,0 +1,46 @@
+# (Required)
+#Rule name, must be unique
+name: DoS_wifi 
+description: "tx_packets/rx_packets higher than x in 2 min"
+
+# (Required) Type of alert. 
+#the frequency rule type alerts when 
+# num_events events occur with timeframe time
+type: frequency
+
+# (Required) Index to search, wildcard supported
+index: wifi
+
+timestamp_field: timestamp
+
+# (Required, frequency specific) 
+#Alert when this many documents matching 
+# the query occur within a timeframe
+num_events: 1
+
+# (Required, frequency specific) num_events must occur within this 
+# amount of time to trigger an alert
+timeframe:
+ # hours: 1
+  minutes: 2 
+
+realert:
+  minutes: 3
+
+attach_related: true
+
+
+#funciona como AND
+filter:
+- range:
+    tx_packets:
+      gt: 2 
+- range:
+    rx_packets:
+      gt: 0 
+- query: 
+    query_string:
+      query: "anomalia: true"
+
+alert:
+- "debug"

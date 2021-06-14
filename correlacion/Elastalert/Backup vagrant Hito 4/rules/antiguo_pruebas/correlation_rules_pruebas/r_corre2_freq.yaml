@@ -1,0 +1,31 @@
+name: pruebas_corre_3_r
+description: "correlacion de r1_redmov, r2_wifi, r3_radiofreq"
+
+type: frequency
+
+index: elastalert_status_pruebas
+
+#use_terms_query: true
+#query_key: rule_name
+#doc_type: _doc
+num_events: 3
+
+timeframe: 
+  minutes: 3
+
+realert: 
+  minutes: 0
+
+attach_related: true
+
+filter: 
+- terms:
+    rule_name: 
+      - r1_redmov_pru
+      - r2_wifi_pru
+      - r3_radiofreq_pru
+
+alert:
+- "debug"
+
+

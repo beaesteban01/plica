@@ -1,0 +1,45 @@
+name: pruebas_corre_3_r
+description: "correlacion de r1_redmov, r2_wifi, r3_radiofreq"
+
+type: frequency
+
+index: elastalert_status_pru_bea
+
+#use_terms_query: true
+#query_key: rule_name
+#doc_type: _doc
+num_events: 3
+
+timeframe: 
+  minutes: 3
+#scan_entire_timeframe: true
+
+realert: 
+  minutes: 0
+
+attach_related: true
+
+filter: 
+#- query: 
+#    query_string: 
+#      query: "match_body.rule_name1: regla1"
+#    query_string:
+#      query: "match_body.rule_name2: regla2"
+#      default_field: rule_name
+#- term:
+#    match_body.rule_name1: "regla1" 
+#- term:
+#    match_body.rule_name2: "regla2"
+#- term: 
+#    match_body.rule_name3: "regla3"
+#    rule_name: "r3_radiofreq_pru"
+- terms:
+    rule_name: 
+      - r1_redmov_pru
+      - r2_wifi_pru
+      - r3_radiofreq_pru
+#import: filtro.yaml
+alert:
+- "debug"
+
+
